@@ -1,0 +1,21 @@
+{
+  "name": "paperplates",
+  "version": "0.0.1",
+  "homepage": "https://github.com/advincze/paperplates",
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.4"
+  }
+}
