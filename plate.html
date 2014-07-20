@@ -1,0 +1,30 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<polymer-element name="pp-plate">
+  <template>
+  	<style type="text/css">
+		#circle {
+		    background: #eee;
+		    width: 400px;
+		    height: 400px;
+		    border-radius: 50%;
+		}
+		span {
+			position: relative;
+			top:50%;
+			left: 50%;
+		}
+  	</style>
+    
+    <div id="circle">
+    	<span>I'm <b>Plate</b>.</span>
+    </div>
+  </template>
+  <script>
+    Polymer('pp-plate', {
+      ready: function() {
+        console.log("initializing plate");
+      }
+    });
+  </script>
+</polymer-element>
