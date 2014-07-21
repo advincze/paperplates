@@ -4,42 +4,42 @@
 	<title>paper plate</title>
 
 	<!-- 1. Load platform.js for polyfill support. -->
-    <script src="/bower_components/platform/platform.js"></script>
+	<script src="/bower_components/platform/platform.js"></script>
 
-    <link rel="import" href="/bower_components/core-toolbar/core-toolbar.html">
+	<link rel="import" href="/bower_components/core-toolbar/core-toolbar.html">
 	<link rel="import" href="/bower_components/core-header-panel/core-header-panel.html">
 	<link rel="import" href="/bower_components/core-icons/core-icons.html">
 	<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
 	<link rel="import" href="/plate.html">
 
-     <style>
+	<style>
 		body {	
 			font-family: Verdana, Geneva, sans-serif;;
 		}
 		core-header-panel {
-		  background: white;
-		  height: 100vh;
-		  width: 100vw;
+			background: white;
+			height: 100vh;
+			width: 100vw;
 		}
 		core-toolbar {
-		  background-color: #03A9F4;
+			background-color: #03A9F4;
 		}
 	</style>
 </head>
 <body fullbleed vertical layout>
 	<core-header-panel flex>
-    <core-toolbar >
-      <!-- <div>Hello World!</div> -->
-      <paper-icon-button id="navicon" 
-        icon="arrow-back"></paper-icon-button>
-      <span flex>Welcome to Paper plates</span>
-      <paper-icon-button id="searchbutton" 
-        icon="search"></paper-icon-button>
-    </core-toolbar>
+	<core-toolbar >
+	<!-- <div>Hello World!</div> -->
+	<paper-icon-button id="navicon" 
+	icon="arrow-back"></paper-icon-button>
+	<span flex>Welcome to Paper plates</span>
+	<paper-icon-button id="searchbutton" 
+	icon="search"></paper-icon-button>
+</core-toolbar>
 
-    <pp-plate></pp-plate>
-    <!-- <proto-element></proto-element> -->
-  </core-header-panel>
+<pp-plate></pp-plate>
+<!-- <proto-element></proto-element> -->
+</core-header-panel>
 
 </body>
 </html>
