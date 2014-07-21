@@ -17,14 +17,13 @@ elements needed:
 
 ####webcomponents
 
-[http://webcomponents.org/]()
-[http://css-tricks.com/modular-future-web-components/
-]()
+[http://webcomponents.org/](http://webcomponents.org/)
+[http://css-tricks.com/modular-future-web-components/](http://css-tricks.com/modular-future-web-components/)
 
 ####polymer:
 
-[http://www.polymer-project.org/docs/start/creatingelements.html]()
+[http://www.polymer-project.org/docs/start/creatingelements.html](http://www.polymer-project.org/docs/start/creatingelements.html)
 
-[http://www.polymer-project.org/docs/elements/layout-elements.html]()
+[http://www.polymer-project.org/docs/elements/layout-elements.html](http://www.polymer-project.org/docs/elements/layout-elements.html)
 
-[http://www.polymer-project.org/docs/polymer/layout-attrs.html]()
+[http://www.polymer-project.org/docs/polymer/layout-attrs.html](http://www.polymer-project.org/docs/polymer/layout-attrs.html)
