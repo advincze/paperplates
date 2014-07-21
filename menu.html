@@ -33,8 +33,9 @@
       console.log(dragInfo.event.target.querySelector('div#box span b'));
 
       
-      dragInfo.avatar.style.cssText = 'border: 3px solid; width: 32px; height: 32px; border-radius: 32px; background-color: whitesmoke';
-      e.detail.avatar.appendChild(dragInfo.event.target.querySelector('div#box span b'));
+      dragInfo.avatar.style.cssText = 'border: 3px solid; width: 64px; height: 64px; border-radius: 32px; background-color: whitesmoke';
+      // e.detail.avatar.appendChild(dragInfo.event.target.querySelector('div#box span b'));
+      e.detail.avatar.innerHTML = dragInfo.event.target.querySelector('div#box span b').innerText;
       dragInfo.drag = function() {
       	// console.log("dragging");
       };
