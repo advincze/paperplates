@@ -10,7 +10,9 @@
 	<link rel="import" href="/bower_components/core-header-panel/core-header-panel.html">
 	<link rel="import" href="/bower_components/core-icons/core-icons.html">
 	<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+	
 	<link rel="import" href="/plate.html">
+	<link rel="import" href="/menu.html">
 
 	<style>
 		body {	
@@ -36,8 +38,18 @@
 	<paper-icon-button id="searchbutton" 
 	icon="search"></paper-icon-button>
 </core-toolbar>
+<div horizontal around-justified layout>
+  <div><pp-plate></pp-plate></div>
+  <div>
+  menu
+  <pp-menuitem></pp-menuitem>
+  <pp-menuitem></pp-menuitem>
+  <pp-menuitem></pp-menuitem>
+  <pp-menuitem></pp-menuitem>
 
-<pp-plate></pp-plate>
+  </div>
+</div>
+
 <!-- <proto-element></proto-element> -->
 </core-header-panel>
 

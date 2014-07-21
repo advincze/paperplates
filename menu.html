@@ -1,0 +1,33 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<polymer-element name="pp-menuitem">
+<template>
+	<style type="text/css">
+		#box {
+			margin-left: 5px;
+			margin-top: 5px;
+			background: #eee;
+			width: 100px;
+			height: 50px;
+			/*border-radius: 50%;*/
+		}
+		span {
+			position: relative;
+			top:50%;
+			left: 50%;
+			margin-left: -55px;
+		}
+	</style>
+	
+	<div id="box">
+		<span>I'm a <b>chicken</b>.</span>
+	</div>
+</template>
+<script>
+	Polymer('pp-menuitem', {
+		ready: function() {
+			console.log("initializing menuitem");
+		}
+	});
+</script>
+</polymer-element>
