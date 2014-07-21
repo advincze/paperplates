@@ -6,7 +6,16 @@ elements needed:
 - menu
 - menuitems
 
+simple http servers
 
+#####npm:
+
+	$  npm install http-server -g
+	$  http-server -p 8000
+	
+#####python2 : 
+	
+	$  python -m SimpleHTTPServer
 
 
 
