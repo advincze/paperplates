@@ -1,6 +1,7 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/core-drag-drop/core-drag-drop.html">
 
-<polymer-element name="pp-menuitem">
+<polymer-element name="pp-menuitem" attributes="name">
 <template>
 	<style type="text/css">
 		#box {
@@ -18,13 +19,32 @@
 			margin-left: -63px;
 		}
 	</style>
-	
+	<core-drag-drop></core-drag-drop>
 	<div id="box">
-		<span>I'm an <b>chicken</b>.</span>
+		<span>I'm an <b>{{name}}</b>.</span>
 	</div>
 </template>
 <script>
+	addEventListener('drag-start', function(e) {
+		//console.log(e.shadowRoot);
+      var dragInfo = e.detail;
+      console.log(dragInfo);
+      console.log(dragInfo.event.target);
+      console.log(dragInfo.event.target.querySelector('div#box span b'));
+
+      
+      dragInfo.avatar.style.cssText = 'border: 3px solid; width: 32px; height: 32px; border-radius: 32px; background-color: whitesmoke';
+      e.detail.avatar.appendChild(dragInfo.event.target.querySelector('div#box span b'));
+      dragInfo.drag = function() {
+      	// console.log("dragging");
+      };
+      dragInfo.drop = function() {
+      	console.log("drop");
+      };
+    });
+
 	Polymer('pp-menuitem', {
+		name: "apple",
 		ready: function() {
 			console.log("initializing menuitem");
 		}
