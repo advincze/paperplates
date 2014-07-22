@@ -10,7 +10,6 @@
 			background: #eee;
 			width: 150px;
 			height: 50px;
-			/*border-radius: 50%;*/
 		}
 		span {
 			position: relative;
@@ -25,28 +24,17 @@
 	</div>
 </template>
 <script>
-	addEventListener('drag-start', function(e) {
-		//console.log(e.shadowRoot);
-      var dragInfo = e.detail;
-      console.log(dragInfo);
-      console.log(dragInfo.event.target);
-      console.log(dragInfo.event.target.querySelector('div#box span b'));
-
-      
-      dragInfo.avatar.style.cssText = 'border: 3px solid; width: 64px; height: 64px; border-radius: 32px; background-color: whitesmoke';
-      // e.detail.avatar.appendChild(dragInfo.event.target.querySelector('div#box span b'));
-      e.detail.avatar.innerHTML = dragInfo.event.target.querySelector('div#box span b').innerText;
-      dragInfo.drag = function() {
-      	// console.log("dragging");
-      };
-      dragInfo.drop = function() {
-      	console.log("drop");
-      };
-    });
-
 	Polymer('pp-menuitem', {
 		name: "apple",
 		ready: function() {
+			this.addEventListener('drag-start', function(e) {
+
+				var dragInfo = e.detail;
+				dragInfo.avatar.style.cssText = ' width: 100px; height: 50px; background-color: whitesmoke';
+				e.detail.avatar.innerText = this.name;
+				dragInfo.drag = function() {};
+				dragInfo.drop = function() {};
+			});
 			console.log("initializing menuitem");
 		}
 	});
