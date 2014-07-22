@@ -32,8 +32,17 @@
 				var dragInfo = e.detail;
 				dragInfo.avatar.style.cssText = ' width: 100px; height: 50px; background-color: whitesmoke';
 				e.detail.avatar.innerText = this.name;
+				var n = this.name;
 				dragInfo.drag = function() {};
-				dragInfo.drop = function() {};
+				dragInfo.drop = function(x) {
+					console.log("dropping "+n);
+					console.log(dragInfo);
+					 var f = dragInfo.framed;
+					 console.log(f);
+					 var dropTarget = dragInfo.event.relatedTarget;
+					 console.log(dropTarget);
+
+				};
 			});
 			console.log("initializing menuitem");
 		}
