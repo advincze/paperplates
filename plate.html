@@ -20,7 +20,7 @@
 	</style>
 	<div id="circle">
 		<div id="content">
-			<span>I'm a <b>Plate</b>.</span>
+			<span>I'm a <b>Plate</b>. {{ totalcalories }} kcal</span>
 			<ul>
 				<template repeat="{{ content in contents }}">
 					<li>{{ content }}</li>
@@ -32,6 +32,7 @@
 <script>
 	Polymer('pp-plate', {
 		contents: [],
+		totalcalories: 0,
 		ready: function() {
 			name: "myplate",
 			console.log("initializing plate");

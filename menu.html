@@ -1,7 +1,7 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 <link rel="import" href="/bower_components/core-drag-drop/core-drag-drop.html">
 
-<polymer-element name="pp-menuitem" attributes="name">
+<polymer-element name="pp-menuitem" attributes="name calories">
 <template>
 	<style type="text/css">
 		#box {
@@ -20,7 +20,7 @@
 	</style>
 	<core-drag-drop></core-drag-drop>
 	<div id="box">
-		<span>I'm an <b>{{name}}</b>.</span>
+		<span>I'm an <b>{{name}}</b>. {{calories}} kcal</span>
 	</div>
 </template>
 <script>
@@ -41,6 +41,7 @@
 
 	Polymer('pp-menuitem', {
 		name: "apple",
+		calories: 72,
 		ready: function() {
 			this.addEventListener('drag-start', function(e) {
 
@@ -48,6 +49,7 @@
 				dragInfo.avatar.style.cssText = ' width: 100px; height: 50px; background-color: whitesmoke';
 				e.detail.avatar.innerText = this.name;
 				var n = this.name;
+				var cal = this.calories;
 				dragInfo.drag = function() {};
 				dragInfo.drop = function(x) {
 					console.log("dropping "+n+ "draginfo: ");
@@ -64,6 +66,7 @@
 					 console.log("plate:");
 					 console.log(plate);
 					 plate.contents.push(n);		
+					 plate.totalcalories += cal;
 					 
 				};
 			});
