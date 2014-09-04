@@ -17,7 +17,13 @@ simple http servers
 	
 	$  python -m SimpleHTTPServer
 
+#####bower
 
+	$  bower install
+
+or 
+
+	$  bower update
 
 
 
