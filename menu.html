@@ -24,6 +24,21 @@
 	</div>
 </template>
 <script>
+	function getPlate(node) {
+		
+    	
+    	while(node.tagName != "PP-PLATE" && node.parentNode != null) {
+    		node = node.parentNode;
+    	}
+    	if(node.parentNode == null){
+    		node = node.host;
+    	}
+    	if(node.tagName == "PP-PLATE"){
+    		return node;
+    	}
+
+	}
+
 	Polymer('pp-menuitem', {
 		name: "apple",
 		ready: function() {
@@ -35,13 +50,21 @@
 				var n = this.name;
 				dragInfo.drag = function() {};
 				dragInfo.drop = function(x) {
-					console.log("dropping "+n);
+					console.log("dropping "+n+ "draginfo: ");
 					console.log(dragInfo);
 					 var f = dragInfo.framed;
+					 console.log("framed: ");
 					 console.log(f);
 					 var dropTarget = dragInfo.event.relatedTarget;
 					 console.log(dropTarget);
-
+				 
+					 // console.log(dropTarget.parentNode);
+					 // console.log(dropTarget.parentNode.host);
+					 var plate = getPlate(dropTarget);
+					 console.log("plate:");
+					 console.log(plate);
+					 plate.contents.push(n);		
+					 
 				};
 			});
 			console.log("initializing menuitem");
