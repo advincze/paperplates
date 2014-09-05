@@ -8,7 +8,7 @@
 			margin-left: 5px;
 			margin-top: 5px;
 			background: #eee;
-			width: 150px;
+			width: 250px;
 			height: 50px;
 		}
 		span {
@@ -25,43 +25,45 @@
 
 </template>
 <script>
-	function getPlate(node) {
-    	while(node.parentNode != null && node.localName != "pp-plate" ) {
-    		node = node.parentNode;
+	function getSuperdropNode(node) {
+    	while(node.tagName != "BODY" ) {
+    		if(node.parentNode != null){
+    			if(node.getAttribute("superdrop")=="pp-menuitem"){
+    				return node;
+    			}
+    			node = node.parentNode;
+    		}else {
+    			node = node.host;
+    		}
     	}
-    	if(node.parentNode === null){
-    		node = node.host;
-    	}
-
-    	if(node.localName === "pp-plate"){
-    		return node;
-    	}
+    	return false
 	}
 
 	Polymer('pp-menuitem', {
-		name: "apple",
-		calories: 72,
+		
 		ready: function() {
 			this.addEventListener('drag-start', function(e) {
 
 				var dragInfo = e.detail;
 				dragInfo.avatar.style.cssText = ' width: 100px; height: 50px; background-color: whitesmoke';
 				e.detail.avatar.innerText = this.name;
+				var t  = this;
 				var n = this.name;
 				var cal = this.calories;
 				dragInfo.drag = function() {};
 				dragInfo.drop = function(x) {
 					var dropTarget = x.event.relatedTarget;
-					var plate = getPlate(dropTarget);
-					if(plate != undefined){
-						plate.contents.push(n);		
-						plate.totalcalories += cal;	 
-					}
+					var superDropNode = getSuperdropNode(dropTarget);
+					superDropNode.fire("super-drop", t);
 				};
 
 
 			});
 			console.log("initializing menuitem");
+		},
+		publish: {
+			name: "apple",
+			calories: 72
 		}
 	});
 </script>

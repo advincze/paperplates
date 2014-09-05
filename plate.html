@@ -1,6 +1,6 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 
-<polymer-element name="pp-plate" >
+<polymer-element name="pp-plate" superdrop="pp-menuitem">
 <template>
 	<style type="text/css">
 		#circle {
@@ -33,6 +33,10 @@
 	Polymer('pp-plate', {
 		ready: function() {
 			console.log("initializing plate");
+			this.addEventListener('super-drop', function(e) {
+				this.totalcalories += e.detail.calories;
+				this.contents.push(e.detail.name);
+			});
 		},
 		publish: {
 			totalcalories: 0,
