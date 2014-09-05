@@ -1,7 +1,7 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 <link rel="import" href="/bower_components/core-drag-drop/core-drag-drop.html">
 
-<polymer-element name="pp-menuitem" attributes="name calories">
+<polymer-element name="pp-menuitem" attributes="name calories" >
 <template>
 	<style type="text/css">
 		#box {
@@ -22,21 +22,20 @@
 	<div id="box">
 		<span>I'm an <b>{{name}}</b>. {{calories}} kcal</span>
 	</div>
+
 </template>
 <script>
 	function getPlate(node) {
-		
-    	
-    	while(node.tagName != "PP-PLATE" && node.parentNode != null) {
+    	while(node.parentNode != null && node.localName != "pp-plate" ) {
     		node = node.parentNode;
     	}
-    	if(node.parentNode == null){
+    	if(node.parentNode === null){
     		node = node.host;
     	}
-    	if(node.tagName == "PP-PLATE"){
+
+    	if(node.localName === "pp-plate"){
     		return node;
     	}
-
 	}
 
 	Polymer('pp-menuitem', {
@@ -52,23 +51,15 @@
 				var cal = this.calories;
 				dragInfo.drag = function() {};
 				dragInfo.drop = function(x) {
-					console.log("dropping "+n+ "draginfo: ");
-					console.log(dragInfo);
-					 var f = dragInfo.framed;
-					 console.log("framed: ");
-					 console.log(f);
-					 var dropTarget = dragInfo.event.relatedTarget;
-					 console.log(dropTarget);
-				 
-					 // console.log(dropTarget.parentNode);
-					 // console.log(dropTarget.parentNode.host);
-					 var plate = getPlate(dropTarget);
-					 console.log("plate:");
-					 console.log(plate);
-					 plate.contents.push(n);		
-					 plate.totalcalories += cal;
-					 
+					var dropTarget = x.event.relatedTarget;
+					var plate = getPlate(dropTarget);
+					if(plate != undefined){
+						plate.contents.push(n);		
+						plate.totalcalories += cal;	 
+					}
 				};
+
+
 			});
 			console.log("initializing menuitem");
 		}
