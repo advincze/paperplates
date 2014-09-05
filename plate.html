@@ -1,6 +1,6 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 
-<polymer-element name="pp-plate">
+<polymer-element name="pp-plate" >
 <template>
 	<style type="text/css">
 		#circle {
@@ -18,7 +18,7 @@
 			margin-left: -55px;
 		}
 	</style>
-	<div id="circle">
+	<div id="circle" >
 		<div id="content">
 			<span>I'm a <b>Plate</b>. {{ totalcalories }} kcal</span>
 			<ul>
@@ -30,13 +30,19 @@
 	</div>
 </template>
 <script>
+
+
 	Polymer('pp-plate', {
-		contents: [],
-		totalcalories: 0,
 		ready: function() {
-			name: "myplate",
 			console.log("initializing plate");
+		},
+		publish: {
+			totalcalories: 0,	
+		},
+		created: function() {
+			this.contents= [];
 		}
+
 	});
 </script>
 </polymer-element>
