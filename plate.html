@@ -1,13 +1,13 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 
-<polymer-element name="pp-plate" superdrop="pp-menuitem">
+<polymer-element name="pp-plate" attributes="size" adamdrop="pp-menuitem" >
 <template>
 	<style type="text/css">
 		#circle {
 			margin: 20px;
 			background: {{ color }};
-			width: 400px;
-			height: 400px;
+			width: {{size}};
+			height: {{size}};
 			border-radius: 50%;
 		}
 		#content {
@@ -33,14 +33,15 @@
 	Polymer('pp-plate', {
 		ready: function() {
 			console.log("initializing plate");
-			this.addEventListener('super-drop', function(e) {
+			this.addEventListener('adam-drop', function(e) {
 				this.totalcalories += e.detail.calories;
 				this.contents.push(e.detail.name);
 			});
 		},
 		publish: {
 			totalcalories: 0,
-			color: "#eee"
+			color: "#eee",
+			size: "400px"
 		},
 		created: function() {
 			this.contents= [];

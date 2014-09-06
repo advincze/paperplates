@@ -25,10 +25,10 @@
 
 </template>
 <script>
-	function getSuperdropNode(node) {
+	function getadamdropNode(node) {
     	while(node.tagName != "BODY" ) {
     		if(node.parentNode != null){
-    			if(node.getAttribute("superdrop")=="pp-menuitem"){
+    			if(node.getAttribute("adamdrop")=="pp-menuitem"){
     				return node;
     			}
     			node = node.parentNode;
@@ -53,11 +53,9 @@
 				dragInfo.drag = function() {};
 				dragInfo.drop = function(x) {
 					var dropTarget = x.event.relatedTarget;
-					var superDropNode = getSuperdropNode(dropTarget);
-					superDropNode.fire("super-drop", t);
+					var adamDropNode = getSuperdropNode(dropTarget);
+					adamDropNode.fire("adam-drop", t);
 				};
-
-
 			});
 			console.log("initializing menuitem");
 		},
