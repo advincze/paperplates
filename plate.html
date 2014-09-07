@@ -49,11 +49,9 @@
 			this.color= "#eee";
 		},
 		superDropHandler: function(e){
-			console.log("super drop hadler, event:");
-			console.log(e);
 			var menuItem = e.detail;
-				this.totalcalories += menuItem.calories;
-				this.contents.push(menuItem.name);
+			this.totalcalories += menuItem.calories;
+			this.contents.push(menuItem.name);
 		}
 
 	});
