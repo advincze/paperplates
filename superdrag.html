@@ -4,20 +4,6 @@
 
 <polymer-element name="super-drag" extends="core-drag-drop">
 <script>
-	function getAdamdropNode(node) {
-    	while(node.tagName != "BODY" ) {
-    		if(node.parentNode != null){
-    			if(node.getAttribute("adamdrop")=="pp-menuitem"){
-    				return node;
-    			}
-    			node = node.parentNode;
-    		}else {
-    			node = node.host;
-    		}
-    	}
-    	return false
-	}
-
 	function getSuperDropNode(node) {
     	while(node.tagName != "BODY" ) {
     		if(node.parentNode != null){
@@ -36,8 +22,6 @@
 		attached: function(){
 			this.super();
 			this.host = this.parentNode.host || this.parentNode;
-			console.log("host");
-			console.log(this.host);
 			this.addEventListener('drag-start', function(e) {
 				var h  = this.host;
 				if(this.dragInfo.drag == undefined){
@@ -48,14 +32,8 @@
 				}
 				this.fire('super-drag-start', this.dragInfo);
 				var dropFun = this.dragInfo.drop;
-				this.dragInfo.drop = function(x){
-					console.log("superdrag-drop");
-					var dropTarget = x.event.relatedTarget;
-					var adamDropNode = getAdamdropNode(dropTarget);
-					if(adamDropNode!=undefined){
-						adamDropNode.fire("adam-drop", h);	
-					}
-
+				this.dragInfo.drop = function(dragInfo){
+					var dropTarget = dragInfo.event.relatedTarget;
 					var superDropNode = getSuperDropNode(dropTarget);
 					if(superDropNode!=undefined){
 						var eventName = "super-drop";
@@ -63,7 +41,7 @@
 							eventName += "-"+h.localName;
 						}
 						superDropNode.fire(eventName, h);	
-					}					
+					}
 					dropFun()
 				}
 			});
