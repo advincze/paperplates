@@ -1,4 +1,5 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="superdrop.html">
 
 <polymer-element name="pp-plate" attributes="size" adamdrop="pp-menuitem" >
 <template>
@@ -18,6 +19,7 @@
 			margin-left: -55px;
 		}
 	</style>
+	<super-drop on-super-drop-pp-menuitem="{{superDropHandler}}">
 	<div id="circle" on-mouseover="{{ enterHandler }}" on-mouseout="{{ leaveHandler }}" >
 		<div id="content" >
 			<span>I'm a <b>Plate</b>. {{ totalcalories }} kcal</span>
@@ -28,16 +30,10 @@
 			</ul>
 		<div>
 	</div>
+	</super-drop>
 </template>
 <script>
-	Polymer('pp-plate', {
-		ready: function() {
-			console.log("initializing plate");
-			this.addEventListener('adam-drop', function(e) {
-				this.totalcalories += e.detail.calories;
-				this.contents.push(e.detail.name);
-			});
-		},
+	Polymer( {
 		publish: {
 			totalcalories: 0,
 			color: "#eee",
@@ -51,6 +47,13 @@
 		},
 		leaveHandler: function(){
 			this.color= "#eee";
+		},
+		superDropHandler: function(e){
+			console.log("super drop hadler, event:");
+			console.log(e);
+			var menuItem = e.detail;
+				this.totalcalories += menuItem.calories;
+				this.contents.push(menuItem.name);
 		}
 
 	});

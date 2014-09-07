@@ -1,5 +1,5 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
-<link rel="import" href="/bower_components/core-drag-drop/core-drag-drop.html">
+<link rel="import" href="superdrag.html">
 
 <polymer-element name="pp-menuitem" attributes="name calories" >
 <template>
@@ -18,46 +18,20 @@
 			margin-left: -63px;
 		}
 	</style>
-	<core-drag-drop></core-drag-drop>
+	<super-drag></super-drag>
 	<div id="box">
 		<span>I'm an <b>{{name}}</b>. {{calories}} kcal</span>
 	</div>
 
 </template>
 <script>
-	function getadamdropNode(node) {
-    	while(node.tagName != "BODY" ) {
-    		if(node.parentNode != null){
-    			if(node.getAttribute("adamdrop")=="pp-menuitem"){
-    				return node;
-    			}
-    			node = node.parentNode;
-    		}else {
-    			node = node.host;
-    		}
-    	}
-    	return false
-	}
 
-	Polymer('pp-menuitem', {
-		
+	Polymer({
 		ready: function() {
-			this.addEventListener('drag-start', function(e) {
-
-				var dragInfo = e.detail;
-				dragInfo.avatar.style.cssText = ' width: 100px; height: 50px; background-color: whitesmoke';
-				e.detail.avatar.innerText = this.name;
-				var t  = this;
-				var n = this.name;
-				var cal = this.calories;
-				dragInfo.drag = function() {};
-				dragInfo.drop = function(x) {
-					var dropTarget = x.event.relatedTarget;
-					var adamDropNode = getSuperdropNode(dropTarget);
-					adamDropNode.fire("adam-drop", t);
-				};
+			this.addEventListener('super-drag-start', function(e) {
+				 e.detail.avatar.style.cssText = ' width: 100px; height: 50px; background-color: whitesmoke';
+				 e.detail.avatar.innerText = this.name;
 			});
-			console.log("initializing menuitem");
 		},
 		publish: {
 			name: "apple",

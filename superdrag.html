@@ -1,8 +1,73 @@
-<polymer-element name="super-drag">
 
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/core-drag-drop/core-drag-drop.html">
+
+<polymer-element name="super-drag" extends="core-drag-drop">
 <script>
-(function() {
-	Polymer();
-})();
+	function getAdamdropNode(node) {
+    	while(node.tagName != "BODY" ) {
+    		if(node.parentNode != null){
+    			if(node.getAttribute("adamdrop")=="pp-menuitem"){
+    				return node;
+    			}
+    			node = node.parentNode;
+    		}else {
+    			node = node.host;
+    		}
+    	}
+    	return false
+	}
+
+	function getSuperDropNode(node) {
+    	while(node.tagName != "BODY" ) {
+    		if(node.parentNode != null){
+    			if(node.tagName == "SUPER-DROP"){
+    				return node;
+    			}
+    			node = node.parentNode;
+    		}else {
+    			node = node.host;
+    		}
+    	}
+    	return false
+	}
+
+	Polymer({
+		attached: function(){
+			this.super();
+			this.host = this.parentNode.host || this.parentNode;
+			console.log("host");
+			console.log(this.host);
+			this.addEventListener('drag-start', function(e) {
+				var h  = this.host;
+				if(this.dragInfo.drag == undefined){
+					this.dragInfo.drag = function() {};
+				}
+				if(this.dragInfo.drop == undefined){
+					this.dragInfo.drop = function() {};
+				}
+				this.fire('super-drag-start', this.dragInfo);
+				var dropFun = this.dragInfo.drop;
+				this.dragInfo.drop = function(x){
+					console.log("superdrag-drop");
+					var dropTarget = x.event.relatedTarget;
+					var adamDropNode = getAdamdropNode(dropTarget);
+					if(adamDropNode!=undefined){
+						adamDropNode.fire("adam-drop", h);	
+					}
+
+					var superDropNode = getSuperDropNode(dropTarget);
+					if(superDropNode!=undefined){
+						var eventName = "super-drop";
+						if(h.localName!=undefined){
+							eventName += "-"+h.localName;
+						}
+						superDropNode.fire(eventName, h);	
+					}					
+					dropFun()
+				}
+			});
+		}
+	});
 </script>
 </polymer-element>
