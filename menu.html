@@ -22,14 +22,18 @@
 	<div id="box">
 		<span>I'm an <b>{{name}}</b>. {{calories}} kcal</span>
 	</div>
-
 </template>
 <script>
 	Polymer({
 		ready: function() {
-			this.addEventListener('super-drag-start', function(e) {
-				 e.detail.avatar.style.cssText = ' width: 100px; height: 50px; background-color: whitesmoke';
-				 e.detail.avatar.innerText = this.name;
+			this.addEventListener('super-drag-start-avatar', function(e) {
+				 e.detail.style.cssText = ' width: 100px; height: 50px; background-color: whitesmoke';
+				 e.detail.innerText = this.name;
+			});
+
+			this.addEventListener('super-drag-drop', function(e) {
+				 console.log("dropping");
+				 console.log(e.detail);
 			});
 		},
 		publish: {

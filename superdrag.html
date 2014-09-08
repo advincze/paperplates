@@ -24,14 +24,11 @@
 			this.host = this.parentNode.host || this.parentNode;
 			this.addEventListener('drag-start', function(e) {
 				var h  = this.host;
-				if(this.dragInfo.drag == undefined){
-					this.dragInfo.drag = function() {};
-				}
-				if(this.dragInfo.drop == undefined){
-					this.dragInfo.drop = function() {};
-				}
-				this.fire('super-drag-start', this.dragInfo);
-				var dropFun = this.dragInfo.drop;
+				this.fire('super-drag-start-avatar', this.dragInfo.avatar);
+				var di = this.dragInfo;
+				this.dragInfo.drag = function(){
+					h.fire('super-drag-drag', di);
+				};
 				this.dragInfo.drop = function(dragInfo){
 					var dropTarget = dragInfo.event.relatedTarget;
 					var superDropNode = getSuperDropNode(dropTarget);
@@ -42,8 +39,8 @@
 						}
 						superDropNode.fire(eventName, h);	
 					}
-					dropFun()
-				}
+					h.fire('super-drag-drop', di);
+				};
 			});
 		}
 	});
