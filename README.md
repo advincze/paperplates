@@ -4,7 +4,22 @@ elements needed:
 
 - plate: 
 - menu
-- menuitems
+- menuitems 
+
+
+# before running the application
+
+#####bower
+
+	$  bower install
+
+or 
+
+	$  bower update
+
+
+
+# running the application
 
 simple http servers
 
@@ -16,16 +31,6 @@ simple http servers
 #####python2 : 
 	
 	$  python -m SimpleHTTPServer
-
-#####bower
-
-	$  bower install
-
-or 
-
-	$  bower update
-
-
 
 ##links
 
