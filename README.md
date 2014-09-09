@@ -2,7 +2,7 @@
 
 
 
-# before running the application
+## before running the application
 
 #####bower
 
@@ -14,7 +14,7 @@ or
 
 
 
-# running the application
+## running the application
 
 simple http servers
 
@@ -27,10 +27,10 @@ simple http servers
 	
 	$  python -m SimpleHTTPServer
 
-### custom elements:
+## custom elements:
 
 
-##### &lt;super-drag&gt;&lt;/super-drag&gt;
+### &lt;super-drag&gt;&lt;/super-drag&gt;
 
 **super-drag** extends core-drag-drop
 
@@ -68,7 +68,7 @@ e.detail = dragInfo from core-drag-drop
 
 
 
-&lt;super-drop&gt;&lt;/super-drop&gt;
+### &lt;super-drop&gt;&lt;/super-drop&gt;
 
 super-drop registers for a dragged object by super-drag
 
