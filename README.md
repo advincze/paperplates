@@ -85,20 +85,21 @@ Example:
   <script>
   	Polymer({
   		publish:{
-  		  message : ""
+  			message : ""
   		},
 		ready: function(e) {
 			this.addEventListener('super-drag-enter-my-draggable-item', function(e) {
-			var draggableItem = e.detail;
-			this.message = "an item is over me";
-		});
-		this.addEventListener('super-drag-leave', function(e) {
-			this.message = "";
-		});
-		this.addEventListener('super-drop-my-draggable-item', function(e) {
-			var draggableItem = e.detail;
-			this.message = "an item was dropped on me";
-		});			}
+				var draggableItem = e.detail;
+				this.message = "an item is over me";
+			});
+			this.addEventListener('super-drag-leave', function(e) {
+				this.message = "";
+			});
+			this.addEventListener('super-drop-my-draggable-item', function(e) {
+				var draggableItem = e.detail;
+				this.message = "an item was dropped on me";
+			});			
+		}
 	});
   </script>
 </polymer-element>
