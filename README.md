@@ -32,7 +32,29 @@ simple http servers
 
 ##### <super-drag></super-drag>
 
+super-drag extends core-drag-drop
+
 super-drag emits drag events to its parentNode or Host (in a Polymer template, place it directly under the <template> tag)
+
+Example:
+
+	<polymer-element name="my-draggable-item" >
+	  <template>
+	    <super-drag></super-drag>
+		<div>...</div>
+		...
+	  </template>
+	  <script>
+	  	Polymer({
+			ready: function() {
+				this.addEventListener('super-drag-start', function(e) {
+					var dragInfo = e.detail;
+					dragInfo.avatar.innerText = this.name;
+				});
+			}
+		});
+	  </script>
+	</polymer-element>
 
 available events:
 
@@ -47,6 +69,37 @@ e.detail = dragInfo from core-drag-drop
 ##### <super-drop>...</super-drop>
 
 super-drop registers for a dragged object by super-drag
+
+Example:
+
+	<polymer-element name="my-drop-target" >
+	  <template>
+	    <super-drop>
+	     ... <!-- elements can be dropped here -->
+
+	     <span>{{ message }}</span>
+	    </super-drop>
+	  </template>
+	  <script>
+	  	Polymer({
+	  		publish:{
+	  		  message : ""
+	  		},
+			ready: function(e) {
+				this.addEventListener('super-drag-enter-my-draggable-item', function(e) {
+				var draggableItem = e.detail;
+				this.message = "an item is over me";
+			});
+			this.addEventListener('super-drag-leave', function(e) {
+				this.message = "";
+			});
+			this.addEventListener('super-drop-my-draggable-item', function(e) {
+				var draggableItem = e.detail;
+				this.message = "an item was dropped on me";
+			});			}
+		});
+	  </script>
+	</polymer-element>
 
 available events:
 
