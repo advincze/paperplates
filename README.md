@@ -38,23 +38,25 @@ super-drag emits drag events to its parentNode or Host (in a Polymer template, p
 
 Example:
 
-	<polymer-element name="my-draggable-item" >
-	  <template>
-	    <super-drag></super-drag>
-		<div>...</div>
-		...
-	  </template>
-	  <script>
-	  	Polymer({
-			ready: function() {
-				this.addEventListener('super-drag-start', function(e) {
-					var dragInfo = e.detail;
-					dragInfo.avatar.innerText = this.name;
-				});
-			}
-		});
-	  </script>
-	</polymer-element>
+```html
+<polymer-element name="my-draggable-item" >
+  <template>
+    <super-drag></super-drag>
+    <div>...</div>
+    ...
+  </template>
+  <script>
+  	Polymer({
+		ready: function() {
+			this.addEventListener('super-drag-start', function(e) {
+				var dragInfo = e.detail;
+				dragInfo.avatar.innerText = this.name;
+			});
+		}
+	});
+  </script>
+</polymer-element>
+```
 
 available events:
 
