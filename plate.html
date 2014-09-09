@@ -19,18 +19,20 @@
 			margin-left: -55px;
 		}
 	</style>
-	<super-drop on-super-drop-pp-menuitem="{{superDropHandler}}" on-super-enter-pp-menuitem="{{superEnterHandler}}" on-super-leave="{{superEnterHandler}}">
-		<div id="circle" >
-			<div id="content" >
-				<span>I'm a <b>Plate</b>. {{ totalcalories }} kcal</span>
-				<ul>
-					<template repeat="{{ content in contents }}">
-						<li>{{ content }}</li>
-					</template>
-				</ul>
-			<div>
+	<super-drop>
+	<div id="circle" >
+		<div id="content" >
+			<span>I'm a <b>Plate</b>. {{ totalcalories }} kcal</span>
+			<ul>
+				<template repeat="{{ content in contents }}">
+					<li>
+						{{ content }}
+					</li>
+				</template>
+			</ul>
 		</div>
-	</super-drop>
+	</div>
+</super-drop>
 </template>
 <script>
 	Polymer( {
@@ -39,19 +41,21 @@
 			color: "#eee",
 			size: "400px"
 		},
+		ready:function(){
+			this.addEventListener('super-drag-enter-pp-menuitem', function(e) {
+				this.color = "#888";
+			});
+			this.addEventListener('super-drag-leave', function(e) {
+				this.color = "#eee";
+			});
+			this.addEventListener('super-drop-pp-menuitem', function(e) {
+				var menuItem = e.detail;
+				this.totalcalories += menuItem.calories;
+				this.contents.push(menuItem.name);
+			});
+		},
 		created: function() {
 			this.contents= [];
-		},
-		superDropHandler: function(e){
-			var menuItem = e.detail;
-			this.totalcalories += menuItem.calories;
-			this.contents.push(menuItem.name);
-		},
-		superEnterHandler: function(e){
-			this.color = "#888";
-		},
-		superLeaveHandler: function(e){
-			this.color = "#eee";
 		}
 	});
 </script>

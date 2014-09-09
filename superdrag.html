@@ -4,54 +4,32 @@
 
 <polymer-element name="super-drag" extends="core-drag-drop">
 <script>
-	function getSuperDropNode(node) {
-    	while(node.tagName != "BODY" ) {
-    		if(node.parentNode != null){
-    			if(node.tagName == "SUPER-DROP"){
-    				return node;
-    			}
-    			node = node.parentNode;
-    		}else {
-    			node = node.host;
-    		}
-    	}
-    	return false
-	}
-
+(function() {
 	Polymer({
 		attached: function(){
 			this.super();
 			this.host = this.parentNode.host || this.parentNode;
-			var h  = this.host;
 			var that  = this;
 			this.addEventListener('drag-start', function(e) {
 				
-				that.fire('core-signal', {name: "dragstarted", data: h});
-				that.fire('super-drag-start-avatar', that.dragInfo.avatar);
-				var dragInfo = e.detail;
+				that.fire('core-signal', {name: "dragstarted", data: that.host});
+				that.fire('super-drag-start', that.dragInfo);
 				
 				that.dragInfo.drag = function(){
-					that.host.fire('super-drag-drag', dragInfo);
+					that.fire('super-drag-drag', that.dragInfo);
 				};
-				that.dragInfo.drop = function(dragInfo){
-					var dropTarget = dragInfo.event.relatedTarget;
-					//console.log("droptagret");
-					//console.log(dragInfo.event.relatedTarget);
+				that.dragInfo.drop = function(){
+					var dropTarget = that.dragInfo.event.relatedTarget;
+
+					dropTarget.dispatchEvent(new CustomEvent('super-drop', {detail: that.host}));
+					dropTarget.dispatchEvent(new CustomEvent('super-drop-'+that.host.localName, {detail: that.host}));
 					
-					var eventName = "super-drop";
-					if(that.host.localName!=undefined){
-						eventName += "-"+that.host.localName;
-					}
-					// dragInfo.event.relatedTarget.fire(eventName, h);	
-					var superDropNode = getSuperDropNode(dropTarget);
-					if(superDropNode!=undefined){
-						superDropNode.fire(eventName, that.host);	
-					}
-					that.host.fire('super-drag-drop', dragInfo);
+					that.fire('super-drag-drop', that.dragInfo);
 					that.fire('core-signal', {name: "dragended", data: that.host});
 				};
 			});
 		}
 	});
+})();
 </script>
 </polymer-element>

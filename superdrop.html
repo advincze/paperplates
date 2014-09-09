@@ -7,51 +7,47 @@
 	<content></content>
 </template>
 <script>
-(function() {
-	Polymer({
-		created: function(){
-			this.draggedObject = null;
-		},
-		attached: function(){
-			var that = this;
-			for(var i in this.childNodes){
-				var node = this.childNodes[i];
-				if(node.nodeType ==1){
-					node.addEventListener("mouseover", function(e){
-						if(that.draggedObject!=null){
-							var eventName = "super-enter";
-							that.fire(eventName, that.draggedObject);						
-							if(that.draggedObject.localName!=undefined){
-								eventName += "-"+that.draggedObject.localName;
+	(function() {
+		Polymer({
+			created: function(){
+				this.draggedObject = null;
+			},
+			attached: function(){
+				var that = this;
+				for(var i in this.childNodes){
+					var node = this.childNodes[i];
+					if(node.nodeType ==1){
+						node.addEventListener("mouseover", function(e){
+							if(that.draggedObject==null){
+								return
 							}
-							that.fire(eventName, that.draggedObject);						
-						}
-					});
-					node.addEventListener("mouseout", function(e){
-						console.log("mouseout");
-						if(that.draggedObject!=null){
-							var eventName = "super-leave";
-							that.fire(eventName, that.draggedObject);						
-							if(that.draggedObject.localName!=undefined){
-								eventName += "-"+that.draggedObject.localName;
+							that.fire("super-drag-enter", that.draggedObject);
+							that.fire("super-drag-enter-"+that.draggedObject.localName, that.draggedObject);
+						});
+						node.addEventListener("mouseout", function(e){
+							if(that.draggedObject==null){
+								return
 							}
-							that.fire(eventName, that.draggedObject);						
-						}
-					});
+							that.fire("super-drag-leave", that.draggedObject);
+							that.fire("super-drag-leave-"+that.draggedObject.localName, that.draggedObject);
+						});
+						node.addEventListener("mouseup", function(e){
+							if(that.draggedObject==null){
+								return
+							}
+							that.fire("super-drag-leave", that.draggedObject);
+							that.fire("super-drag-leave-"+that.draggedObject.localName, that.draggedObject);
+						});
+					}
 				}
+			},
+			dragStartSignal: function(e, detail, sender) {
+				this.draggedObject = detail;
+			},
+			dragEndSignal: function(e, detail, sender) {
+				this.draggedObject = null;
 			}
-		},
-		dragStartSignal: function(e, detail, sender) {
-			this.draggedObject = detail;
-        	console.log("received core signal start", e);
-
-      	},
-		dragEndSignal: function(e, detail, sender) {
-			this.draggedObject = null;
-        	console.log("received core signal end", e);
-
-      	}
-	});
-})();
+		});
+	})();
 </script>
 </polymer-element>
