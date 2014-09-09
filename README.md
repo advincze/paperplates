@@ -1,10 +1,5 @@
 #paperplates
 
-elements needed:
-
-- plate: 
-- menu
-- menuitems 
 
 
 # before running the application
@@ -31,6 +26,44 @@ simple http servers
 #####python2 : 
 	
 	$  python -m SimpleHTTPServer
+
+# custom elements:
+
+
+##### <super-drag></super-drag>
+
+super-drag emits drag events to its parentNode or Host (in a Polymer template, place it directly under the <template> tag)
+
+available events:
+
+* **super-drag-start**: dragging started
+* **super-drag-drag**: dragging (coordinates, etc available)
+* **super-drag-drop**: dragging ended 
+
+e.detail = dragInfo from core-drag-drop
+
+
+
+##### <super-drop>...</super-drop>
+
+super-drop registers for a dragged object by super-drag
+
+available events:
+
+* **super-drag-enter**: an element was dragged onto an enclosed childNode
+* **super-drag-enter-{custom-elem}**: a {custom-elem} element was dragged onto an enclosed childNode
+* **super-drag-leave**: an element was dragged out of an enclosed childNode or dropped
+* **super-drag-leave-{custom-elem}**: a {custom-elem} element was dragged out of an enclosed childNode or dropped
+* **super-drop**: an element was dragged onto an enclosed childNode
+* **super-drop-{custom-elem}**: a {custom-elem} element was dragged onto an enclosed childNode
+
+
+
+
+
+
+
+
 
 ##links
 
