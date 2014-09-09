@@ -73,36 +73,36 @@ e.detail = dragInfo from core-drag-drop
 super-drop registers for a dragged object by super-drag
 
 Example:
+```html
+<polymer-element name="my-drop-target" >
+  <template>
+    <super-drop>
+     ... <!-- elements can be dropped here -->
 
-	<polymer-element name="my-drop-target" >
-	  <template>
-	    <super-drop>
-	     ... <!-- elements can be dropped here -->
-
-	     <span>{{ message }}</span>
-	    </super-drop>
-	  </template>
-	  <script>
-	  	Polymer({
-	  		publish:{
-	  		  message : ""
-	  		},
-			ready: function(e) {
-				this.addEventListener('super-drag-enter-my-draggable-item', function(e) {
-				var draggableItem = e.detail;
-				this.message = "an item is over me";
-			});
-			this.addEventListener('super-drag-leave', function(e) {
-				this.message = "";
-			});
-			this.addEventListener('super-drop-my-draggable-item', function(e) {
-				var draggableItem = e.detail;
-				this.message = "an item was dropped on me";
-			});			}
+     <span>{{ message }}</span>
+    </super-drop>
+  </template>
+  <script>
+  	Polymer({
+  		publish:{
+  		  message : ""
+  		},
+		ready: function(e) {
+			this.addEventListener('super-drag-enter-my-draggable-item', function(e) {
+			var draggableItem = e.detail;
+			this.message = "an item is over me";
 		});
-	  </script>
-	</polymer-element>
-
+		this.addEventListener('super-drag-leave', function(e) {
+			this.message = "";
+		});
+		this.addEventListener('super-drop-my-draggable-item', function(e) {
+			var draggableItem = e.detail;
+			this.message = "an item was dropped on me";
+		});			}
+	});
+  </script>
+</polymer-element>
+```
 available events:
 
 * **super-drag-enter**: an element was dragged onto an enclosed childNode
@@ -111,12 +111,6 @@ available events:
 * **super-drag-leave-{custom-elem}**: a {custom-elem} element was dragged out of an enclosed childNode or dropped
 * **super-drop**: an element was dragged onto an enclosed childNode
 * **super-drop-{custom-elem}**: a {custom-elem} element was dragged onto an enclosed childNode
-
-
-
-
-
-
 
 
 
