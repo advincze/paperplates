@@ -7,8 +7,8 @@
 		#box {
 			margin-left: 5px;
 			margin-top: 5px;
-			background: #eee;
-			width: 250px;
+			background: {{ color }};
+			width: 350px;
 			height: 50px;
 		}
 		span {
@@ -25,19 +25,22 @@
 </template>
 <script>
 	Polymer({
+		created: function(){
+			this.color = "#eee";
+		},
 		ready: function() {
-			// this.addEventListener('super-drag-start-avatar', function(e) {
-			// 	e.detail.style.cssText = ' width: 100px; height: 50px; background-color: whitesmoke';
-			// 	e.detail.innerText = this.name;
-			// });
 			this.addEventListener('super-drag-start', function(e) {
 				var dragInfo = e.detail;
 				dragInfo.avatar.style.cssText = ' width: 100px; height: 50px; background-color: whitesmoke';
 				dragInfo.avatar.innerText = this.name;
+				this.color = "#CAB4D4";
 			});
-
+			this.addEventListener('super-drag-drag', function(e) {
+				var dragInfo = e.detail;
+				dragInfo.avatar.innerText = this.name + " x:"+dragInfo.event.pageX + " y:"+dragInfo.event.pageY;
+			});
 			this.addEventListener('super-drag-drop', function(e) {
-				
+				this.color = "#eee";
 			});
 		},
 		publish: {
