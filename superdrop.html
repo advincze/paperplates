@@ -1,9 +1,57 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/core-signals/core-signals.html">
 
 <polymer-element name="super-drop">
+<template>
+	<core-signals on-core-signal-dragstarted="{{dragStartSignal}}" on-core-signal-dragended="{{dragEndSignal}}" ></core-signals>
+	<content></content>
+</template>
 <script>
 (function() {
-	Polymer();
+	Polymer({
+		created: function(){
+			this.draggedObject = null;
+		},
+		attached: function(){
+			var that = this;
+			for(var i in this.childNodes){
+				var node = this.childNodes[i];
+				if(node.nodeType ==1){
+					node.addEventListener("mouseover", function(e){
+						if(that.draggedObject!=null){
+							var eventName = "super-enter";
+							that.fire(eventName, that.draggedObject);						
+							if(that.draggedObject.localName!=undefined){
+								eventName += "-"+that.draggedObject.localName;
+							}
+							that.fire(eventName, that.draggedObject);						
+						}
+					});
+					node.addEventListener("mouseout", function(e){
+						console.log("mouseout");
+						if(that.draggedObject!=null){
+							var eventName = "super-leave";
+							that.fire(eventName, that.draggedObject);						
+							if(that.draggedObject.localName!=undefined){
+								eventName += "-"+that.draggedObject.localName;
+							}
+							that.fire(eventName, that.draggedObject);						
+						}
+					});
+				}
+			}
+		},
+		dragStartSignal: function(e, detail, sender) {
+			this.draggedObject = detail;
+        	console.log("received core signal start", e);
+
+      	},
+		dragEndSignal: function(e, detail, sender) {
+			this.draggedObject = null;
+        	console.log("received core signal end", e);
+
+      	}
+	});
 })();
 </script>
 </polymer-element>

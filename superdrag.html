@@ -22,24 +22,33 @@
 		attached: function(){
 			this.super();
 			this.host = this.parentNode.host || this.parentNode;
+			var h  = this.host;
+			var that  = this;
 			this.addEventListener('drag-start', function(e) {
-				var h  = this.host;
-				this.fire('super-drag-start-avatar', this.dragInfo.avatar);
-				var di = this.dragInfo;
-				this.dragInfo.drag = function(){
-					h.fire('super-drag-drag', di);
+				
+				that.fire('core-signal', {name: "dragstarted", data: h});
+				that.fire('super-drag-start-avatar', that.dragInfo.avatar);
+				var dragInfo = e.detail;
+				
+				that.dragInfo.drag = function(){
+					that.host.fire('super-drag-drag', dragInfo);
 				};
-				this.dragInfo.drop = function(dragInfo){
+				that.dragInfo.drop = function(dragInfo){
 					var dropTarget = dragInfo.event.relatedTarget;
+					//console.log("droptagret");
+					//console.log(dragInfo.event.relatedTarget);
+					
+					var eventName = "super-drop";
+					if(that.host.localName!=undefined){
+						eventName += "-"+that.host.localName;
+					}
+					// dragInfo.event.relatedTarget.fire(eventName, h);	
 					var superDropNode = getSuperDropNode(dropTarget);
 					if(superDropNode!=undefined){
-						var eventName = "super-drop";
-						if(h.localName!=undefined){
-							eventName += "-"+h.localName;
-						}
-						superDropNode.fire(eventName, h);	
+						superDropNode.fire(eventName, that.host);	
 					}
-					h.fire('super-drag-drop', di);
+					that.host.fire('super-drag-drop', dragInfo);
+					that.fire('core-signal', {name: "dragended", data: that.host});
 				};
 			});
 		}

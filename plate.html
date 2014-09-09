@@ -19,17 +19,17 @@
 			margin-left: -55px;
 		}
 	</style>
-	<super-drop on-super-drop-pp-menuitem="{{superDropHandler}}">
-	<div id="circle" on-mouseover="{{ enterHandler }}" on-mouseout="{{ leaveHandler }}" >
-		<div id="content" >
-			<span>I'm a <b>Plate</b>. {{ totalcalories }} kcal</span>
-			<ul>
-				<template repeat="{{ content in contents }}">
-					<li>{{ content }}</li>
-				</template>
-			</ul>
-		<div>
-	</div>
+	<super-drop on-super-drop-pp-menuitem="{{superDropHandler}}" on-super-enter-pp-menuitem="{{superEnterHandler}}" on-super-leave="{{superEnterHandler}}">
+		<div id="circle" >
+			<div id="content" >
+				<span>I'm a <b>Plate</b>. {{ totalcalories }} kcal</span>
+				<ul>
+					<template repeat="{{ content in contents }}">
+						<li>{{ content }}</li>
+					</template>
+				</ul>
+			<div>
+		</div>
 	</super-drop>
 </template>
 <script>
@@ -42,18 +42,17 @@
 		created: function() {
 			this.contents= [];
 		},
-		enterHandler: function(){
-			this.color= "#888";
-		},
-		leaveHandler: function(){
-			this.color= "#eee";
-		},
 		superDropHandler: function(e){
 			var menuItem = e.detail;
 			this.totalcalories += menuItem.calories;
 			this.contents.push(menuItem.name);
+		},
+		superEnterHandler: function(e){
+			this.color = "#888";
+		},
+		superLeaveHandler: function(e){
+			this.color = "#eee";
 		}
-
 	});
 </script>
 </polymer-element>
