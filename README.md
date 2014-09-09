@@ -27,12 +27,12 @@ simple http servers
 	
 	$  python -m SimpleHTTPServer
 
-# custom elements:
+### custom elements:
 
 
-##### <super-drag></super-drag>
+##### &lt;super-drag&gt;&lt;/super-drag&gt;
 
-super-drag extends core-drag-drop
+**super-drag** extends core-drag-drop
 
 super-drag emits drag events to its parentNode or Host (in a Polymer template, place it directly under the <template> tag)
 
@@ -68,7 +68,7 @@ e.detail = dragInfo from core-drag-drop
 
 
 
-##### <super-drop>...</super-drop>
+&lt;super-drop&gt;&lt;/super-drop&gt;
 
 super-drop registers for a dragged object by super-drag
 
