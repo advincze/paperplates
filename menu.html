@@ -7,7 +7,6 @@
 		#box {
 			margin-left: 5px;
 			margin-top: 5px;
-			background: {{ color }};
 			width: 350px;
 			height: 50px;
 		}
@@ -19,7 +18,7 @@
 		}
 	</style>
 	<super-drag></super-drag>
-	<div id="box">
+	<div id="box" style="background: {{ color }}">
 		<span>I'm an <b>{{name}}</b>. {{calories}} kcal</span>
 	</div>
 </template>
@@ -32,12 +31,13 @@
 			this.addEventListener('super-drag-start', function(e) {
 				var dragInfo = e.detail;
 				dragInfo.avatar.style.cssText = ' width: 100px; height: 50px; background-color: whitesmoke';
-				dragInfo.avatar.innerText = this.name;
+				dragInfo.avatar.textContent = this.name;
 				this.color = "#CAB4D4";
 			});
 			this.addEventListener('super-drag-drag', function(e) {
 				var dragInfo = e.detail;
-				dragInfo.avatar.innerText = this.name + " x:"+dragInfo.event.pageX + " y:"+dragInfo.event.pageY;
+				var text = this.name + " x:"+dragInfo.event.pageX + " y:"+dragInfo.event.pageY;
+				dragInfo.avatar.textContent = text;
 			});
 			this.addEventListener('super-drag-drop', function(e) {
 				this.color = "#eee";

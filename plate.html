@@ -6,9 +6,6 @@
 	<style type="text/css">
 		#circle {
 			margin: 20px;
-			background: {{ color }};
-			width: {{size}};
-			height: {{size}};
 			border-radius: 50%;
 		}
 		#content {
@@ -18,9 +15,9 @@
 			left: 50%;
 			margin-left: -55px;
 		}
-	</style>
-	<super-drop>
-	<div id="circle" >
+	</style>	<super-drop>
+	<div id="circle" style="background: {{ color }}; width: {{size}}; height: {{size}};">
+		
 		<div id="content" >
 			<span>I'm a <b>Plate</b>. {{ totalcalories }} kcal</span>
 			<ul>
@@ -31,8 +28,9 @@
 				</template>
 			</ul>
 		</div>
+		
 	</div>
-</super-drop>
+	</super-drop>
 </template>
 <script>
 	Polymer( {
@@ -43,6 +41,7 @@
 		},
 		ready:function(){
 			this.addEventListener('super-drag-enter-pp-menuitem', function(e) {
+				console.log('monkey');
 				this.color = "#888";
 			});
 			this.addEventListener('super-drag-leave', function(e) {
