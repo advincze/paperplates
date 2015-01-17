@@ -16,9 +16,9 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.4.0",
-    "paper-elements": "Polymer/paper-elements#~0.4.0",
-    "core-drag-drop": "Polymer/core-drag-drop#~0.4.0",
+    "polymer": "Polymer/polymer#~0.5.1",
+    "paper-elements": "Polymer/paper-elements#~0.5.1",
+    "core-drag-drop": "Polymer/core-drag-drop#~0.5.1",
     "core-dropdown": "Polymer/core-dropdown",
     "core-signals": "Polymer/core-signals"
   }
